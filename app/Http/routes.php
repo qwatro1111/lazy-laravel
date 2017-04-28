@@ -10,7 +10,7 @@ Route::get('/', function () {
     $tasks = Task::orderBy('created_at', 'asc')->get();
     return view('tasks', [
 	'tasks' => $tasks,
-	'title' => 'all tasks',
+	'title' => 'Products',
     ]);
 });
 
@@ -19,7 +19,9 @@ Route::get('/', function () {
  */
 Route::post('/task', function (Request $request) {
     $validator = Validator::make($request->all(), [
-		'name' => 'required|max:255',
+	'name' => 'required|max:255',
+	'description' => 'required|max:255',
+	'price' => 'required|numeric',
     ]);
 
     if ($validator->fails()) {
@@ -29,6 +31,8 @@ Route::post('/task', function (Request $request) {
     }
     $task = new Task;
     $task->name = $request->name;
+    $task->description = $request->description;
+    $task->price = $request->price;
     $task->save();
 
     return redirect('/');

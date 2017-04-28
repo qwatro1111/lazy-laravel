@@ -4,7 +4,7 @@
 
 <!-- Bootstrap шаблон... -->
 
-<div class="panel-body">
+<div>
     <!-- Отображение ошибок проверки ввода -->
     @include('common.errors')
 
@@ -14,10 +14,26 @@
 
 	<!-- Имя задачи -->
 	<div class="form-group">
-	    <label for="task" class="col-sm-3 control-label">Задача</label>
+	    <label for="task" class="col-sm-3 control-label">Name</label>
 
 	    <div class="col-sm-6">
 		<input type="text" name="name" id="task-name" class="form-control">
+	    </div>
+	</div>
+	
+	<div class="form-group">
+	    <label for="task" class="col-sm-3 control-label">Description</label>
+
+	    <div class="col-sm-6">
+		<input type="text" name="description" id="task-name" class="form-control">
+	    </div>
+	</div>
+	
+	<div class="form-group">
+	    <label for="task" class="col-sm-3 control-label">Price</label>
+
+	    <div class="col-sm-6">
+		<input type="text" name="price" id="task-name" class="form-control">
 	    </div>
 	</div>
 
@@ -36,7 +52,7 @@
 @if (count($tasks) > 0)
 <div class="panel panel-default">
     <div class="panel-heading">
-        Текущая задача
+        Products
     </div>
 
     <div class="panel-body">
@@ -44,17 +60,24 @@
 
 	    <!-- Заголовок таблицы -->
 	    <thead>
-            <th>Task</th>
+		<tr>
+		    <th>Name</th>
+		    <th>Price</th>
+		</tr>
+            
             <th>&nbsp;</th>
 	    </thead>
 
 	    <!-- Тело таблицы -->
 	    <tbody>
 		@foreach ($tasks as $task)
-		<tr>
+		<tr title="{{ $task->description }}">
 		    <!-- Имя задачи -->
 		    <td class="table-text">
 			<div>{{ $task->name }}</div>
+		    </td>
+		    <td class="table-text">
+			<div>{{ $task->price }}</div>
 		    </td>
 
 		    <td>
